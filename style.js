@@ -26,6 +26,7 @@ export default StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'stretch',
       },
     
       
@@ -50,10 +51,29 @@ export default StyleSheet.create({
         margin: 20,
         marginLeft: 20,
         marginRight: 20,
+
       },
     
       progbar: {
         fontSize: 12,
         color: 'green',
       },
+
+
+
+
+    image: {
+        height: '50%',
+        width: '50%'
+    },
+    touchable: {
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    // text: {
+    //   color: colors.button,
+    //   fontSize: 18,
+    //   textAlign: 'center'
+    // }
+    
 });
