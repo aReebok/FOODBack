@@ -86,7 +86,7 @@ export default class Home extends Component {
                         'Its home !')}
                 />
                 <Button  
-                    title="🍴"
+                    title="🍴🍴"
                     onPress={() => Alert.alert(
                         'Its caf !')}
                 />
