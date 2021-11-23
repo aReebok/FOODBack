@@ -3,6 +3,10 @@ import { Image, Text, View, ScrollView, Button, Alert, TouchableOpacity } from '
 
 import styles from './style'
 import CafRating from './CafRating';
+import HotAtCage from './HotAtCage';
+import DrinkOfTheMonth from './DrinkOfTheMonth';
+import NavBar from './NavBar';
+import NewItems from './NewItems';
 
 
 
@@ -20,8 +24,6 @@ export default class Home extends Component {
       }
     }
 
-
-
     render() {
       return (
         <View style={styles.container}>
@@ -34,75 +36,13 @@ export default class Home extends Component {
             <View style={styles.body}>
                 <ScrollView style={styles.scrollView}>
                     <CafRating/>
-                    <VerticleLine/> 
-                                        
-
-                    
-
-                    <View style={styles.section}>
-                        <Text style={{fontSize: 30, }}> HOT 🔥 @ CAGE </Text>
-                        
-                        <Text style={{fontWeight: 'bold',}}>     DRINKS </Text>
-                        <Text >{'\t'}🔥 Mango Lemonade </Text>
-                        <Text >{'\t'}🔥 Iced Latte </Text>
-                        <Text >{'\t'}🔥 Stawberry Italian Soda </Text>
-
-                        <Text style={{fontWeight: 'bold',}}>     FOOD </Text>
-                        <Text >{'\t'}🔥 Garlic Aioli Burger </Text>
-                        <Text >{'\t'}🔥 St. Olaf Burger </Text>
-                        <Text >{'\t'}🔥 Impossible Burger </Text>
-                    </View>
-                    <VerticleLine/>
-
-                    
-
-                    <View style={styles.section}>
-                      <Text style={styles.text}> 
-                        DRINK OF THE MONTH
-                      </Text>
-                    </View>
-                    
-                    <VerticleLine/>
-                    <View style={{
-                        borderBottomColor: 'grey',
-                        borderBottomWidth: 1, }}/>
-
+                    <HotAtCage/>
+                    <DrinkOfTheMonth/>       
+                    <NewItems/>             
                 </ScrollView>
+                <NavBar/>
             </View>
-            <View style={styles.nav}>
-                {/* <Image source={{uri: this.state.home}}
-                    style={{width: undefined, height: '100%', aspectRatio: 1,}} />
-                <Image source={{uri: this.state.stav}}
-                    style={{width: undefined, height: '100%', aspectRatio: 1,}} />
-                <Image source={{uri: this.state.cage}}
-                    style={{width: undefined, height: '100%', aspectRatio: 1,}} />
-                <Image source={{uri: this.state.app_icon}}
-                    style={{width: undefined, height: '100%', aspectRatio: 1,}} />  */}
-
-                <Button 
-                            
-                    title="🏠"
-                    onPress={() => Alert.alert(
-                        'Its home !')}
-                />
-                <Button  
-                    title="🍴🍴"
-                    onPress={() => Alert.alert(
-                        'Its caf !')}
-                />
-                <Button  
-                    title="☕"
-                    onPress={() => Alert.alert(
-                        'Its cage !')}
-                />
-                <Button  
-                    title="🍕"
-                    onPress={() => Alert.alert(
-                        'Its pause !')}
-                />
-
-            </View>
-
+            
         </View>
         
 
@@ -110,16 +50,3 @@ export default class Home extends Component {
     }
 
   }
-
-  /* Verticle lines used to seperate sections and comments */
-
-  class VerticleLine extends Component {
-    constructor (props) { super(props); }
-    render () {
-        return(
-            <View style={{
-                borderBottomColor: 'grey',
-                borderBottomWidth: 0.5, }}/>
-        )
-    }
-}
