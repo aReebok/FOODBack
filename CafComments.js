@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, View, ScrollView, Button, Alert, TouchableOpacity } from 'react-native';
+import { Image, Text, View, TextInput, ScrollView, Button, Alert, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 
 import styles from './home_features/styles'
 import Comment from './comment_feature/Comment'
@@ -42,9 +42,23 @@ export default class Home extends Component {
                         {/* This is where one comment will be */}
                         <Comment text={'this is a long long I WANT ofshdufhiue long long long long comment'}/>
                         <Comment text={'Comment 2'}/>
-
                     </View>
+
                 </ScrollView>
+
+                <View>
+                    <KeyboardAvoidingView
+                        // keyboardVerticalOffset={}
+                        behavior= {Platform.OS === 'ios' ? "padding" : "height"}
+                        style={styles.writeCommentWrapper}>
+                            <TextInput style={styles.input} placeholder={"Write a comment"}></TextInput>
+                        <TouchableOpacity  >
+                            <View style={styles.addWrapper}>
+                                <Text style={styles.addText}>+</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </KeyboardAvoidingView>
+                </View>
                 <NavBar/>
             </View>
             
