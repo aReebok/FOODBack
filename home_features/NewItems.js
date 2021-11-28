@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Text, View, ScrollView, Button, Alert, TouchableOpacity } from 'react-native';
 
-import styles from './style'
+import styles from './styles'
 
 export default class NewItems extends Component {
     /*A section that includes the 3 newest items at cage
@@ -22,7 +22,6 @@ export default class NewItems extends Component {
             </View>
         )
     }
-
 }
 
 

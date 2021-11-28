@@ -23,6 +23,7 @@ export default StyleSheet.create({
     
       body: {
         flex: 20,
+        // padding: 10,
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
@@ -40,11 +41,13 @@ export default StyleSheet.create({
       },
     
       text: {
-        fontSize: 25,
+        padding: 10,
+        fontSize: 20,
+        fontWeight: 'bold',
       },
     
       section: {
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#e6e6e6',
         paddingTop: 10,
         paddingBottom: 10,
         padding: 10,
@@ -59,9 +62,6 @@ export default StyleSheet.create({
         color: 'green',
       },
 
-
-
-
     image: {
         height: '50%',
         width: '50%'
@@ -71,5 +71,9 @@ export default StyleSheet.create({
       justifyContent: 'center'
     },
 
-    
+    /////// comment section
+
+    comments: {
+      padding: 10,
+    },
 });

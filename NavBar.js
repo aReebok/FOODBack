@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Text, View, ScrollView, Button, Alert, TouchableOpacity } from 'react-native';
 
-import styles from './style'
+import styles from './home_features/styles'
 
 export default class NavBar extends Component {
     constructor (props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Text, View, ScrollView, Button, Alert, TouchableOpacity } from 'react-native';
 
-import styles from './style'
+import styles from './styles'
 
 export default class CafRating extends Component {
     constructor (props) {

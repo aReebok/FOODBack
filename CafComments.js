@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { Image, Text, View, ScrollView, Button, Alert, TouchableOpacity } from 'react-native';
 
 import styles from './home_features/styles'
-import CafRating from './home_features/CafRating';
-import HotAtCage from './home_features/HotAtCage';
-import DrinkOfTheMonth from './home_features/DrinkOfTheMonth';
-import NewItems from './home_features/NewItems';
+import Comment from './comment_feature/Comment'
 
 import NavBar from './NavBar';
 
@@ -35,10 +32,18 @@ export default class Home extends Component {
       
             <View style={styles.body}>
                 <ScrollView style={styles.scrollView}>
-                    <CafRating/>
+                    {/* <CafRating/>
                     <HotAtCage/>
                     <DrinkOfTheMonth/>       
-                    <NewItems/>             
+                    <NewItems/>              */}
+
+                    <Text style={styles.text}>Caf Comments</Text>
+                    <View style={styles.comments}>
+                        {/* This is where one comment will be */}
+                        <Comment text={'this is a long long I WANT ofshdufhiue long long long long comment'}/>
+                        <Comment text={'Comment 2'}/>
+
+                    </View>
                 </ScrollView>
                 <NavBar/>
             </View>
@@ -50,3 +55,5 @@ export default class Home extends Component {
     }
 
   }
+
+  
