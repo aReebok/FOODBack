@@ -46,21 +46,22 @@ export default class Home extends Component {
 
                 </ScrollView>
 
-                <View>
-                    <KeyboardAvoidingView
-                        // keyboardVerticalOffset={}
-                        behavior= {Platform.OS === 'ios' ? "padding" : "height"}
-                        style={styles.writeCommentWrapper}>
-                            <TextInput style={styles.input} placeholder={"Write a comment"}></TextInput>
-                        <TouchableOpacity  >
-                            <View style={styles.addWrapper}>
-                                <Text style={styles.addText}>+</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </KeyboardAvoidingView>
-                </View>
-                <NavBar/>
+                
+                <KeyboardAvoidingView 
+                    keyboardVerticalOffset = {120} 
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                    style={styles.writeCommentWrapper}>
+                    <TextInput style={styles.input} placeholder={'Write a task'} />
+                    <TouchableOpacity >
+                    <View style={styles.addWrapper}>
+                        <Text style={styles.addText}>+</Text>
+                    </View>
+                    </TouchableOpacity>
+                </KeyboardAvoidingView>
+                
             </View>
+            {/* <NavBar/> */}
+
             
         </View>
         

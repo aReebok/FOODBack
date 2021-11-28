@@ -94,14 +94,14 @@ export default StyleSheet.create({
       borderColor: '#c0c0c0',
       borderWidth: 1,
 
-      width: 250,
+      width: 300,
       
     },
     addWrapper: {
-      width:60,
-      height:60,
+      width:50,
+      height:50,
       backgroundColor: '#e6e6e6',
-      borderRadius:60,
+      borderRadius:50,
       justifyContent: 'center',
       alignItems: 'center',
       borderColor: '#c0c0c0',
