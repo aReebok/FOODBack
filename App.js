@@ -7,8 +7,8 @@ import Home from './library/Home';
 export default class MyApp extends Component {
   render() {
     return (
-      <Home/>
-      // <CafComments/>
+      // <Home/>
+      <CafComments/>
     )
   }
 }
