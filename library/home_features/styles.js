@@ -2,10 +2,7 @@ import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
 
-<<<<<<< HEAD
-=======
 
->>>>>>> areeba
     container: {
         flex: 1,
     

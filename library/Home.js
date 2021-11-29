@@ -7,7 +7,7 @@ import HotAtCage from './home_features/HotAtCage';
 import DrinkOfTheMonth from './home_features/DrinkOfTheMonth';
 import NewItems from './home_features/NewItems';
 
-import NavBar from './NavBar';
+// import NavBar from '../NavBar';
 
 
 export default class Home extends Component {
@@ -40,7 +40,7 @@ export default class Home extends Component {
                     <DrinkOfTheMonth/>       
                     <NewItems/>             
                 </ScrollView>
-                <NavBar/>
+                {/* <NavBar/> */}
             </View>
             
         </View>
