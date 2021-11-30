@@ -23,34 +23,33 @@ function CafComments(props) {
       return (
         <View style={styles.container}>
             <View style={styles.header1}></View>
-
             <View style={styles.header2}>
                 <Image source={app_logo} style={{margin: 10, height: '100%', aspectRatio: 1.8,}} />
             </View>
       
             <View style={styles.body}>
+
                 <ScrollView style={styles.scrollView}>
-                    {/* <CafRating/>
-                    <HotAtCage/>
-                    <DrinkOfTheMonth/>       
-                    <NewItems/>         */}
-
-                    <Text style={styles.text}>Caf Comments</Text>
-                    <View style={styles.comments}>
-                        {/* This is where one comment will be */}
-                        {
-                            commentItems.map((item, index) => {
-                                return <Comment key={index} text={item} />
-                            })
-                        }
-                        {/* <Comment text={'this is a long long I WANT ofshdufhiue long long long long comment'}/>
-                        <Comment text={'Comment 2'}/> */}
+                    <View style={styles.section}>
+                        <Text style={styles.text}>CAF COMMENTS</Text>
+                        <View
+                            style={{
+                            borderBottomColor: 'grey',
+                            borderBottomWidth: 1,
+                            }}/>
+                        <View style={styles.comments}>
+                            {/* This is where one comment will be */}
+                            {
+                                commentItems.map((item, index) => {
+                                    return <Comment key={index} text={item} />                                 })
+                            }
+                        </View>
                     </View>
-
+                    
                 </ScrollView>
 
                 <KeyboardAvoidingView 
-                    keyboardVerticalOffset = {120} 
+                    keyboardVerticalOffset = {145} 
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
                     style={styles.writeCommentWrapper}>
                     <TextInput style={styles.input} placeholder={'Write a task'} value={comment} onChangeText={text => setComment(text)} />
@@ -69,10 +68,6 @@ function CafComments(props) {
                     <Button title="💬"/>   
 
             </View>
-
-
-            {/* <NavBar/> */}
-
             
         </View>
         
@@ -82,3 +77,4 @@ function CafComments(props) {
   }
 
   export default CafComments;
+

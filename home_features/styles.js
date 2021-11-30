@@ -42,7 +42,7 @@ export default StyleSheet.create({
       },
     
       text: {
-        padding: 10,
+        // padding: 10,
         fontSize: 20,
         fontWeight: 'bold',
       },
@@ -80,7 +80,7 @@ export default StyleSheet.create({
 
     writeCommentWrapper: {
       position: 'absolute',
-      bottom: 60,
+      bottom: 0,
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-around',
@@ -91,18 +91,18 @@ export default StyleSheet.create({
       paddingVertical:15,
       paddingHorizontal: 15,
       backgroundColor: '#e6e6e6',
-      borderRadius: 60,
+      // borderRadius: 60,
       borderColor: '#c0c0c0',
       borderWidth: 1,
 
-      width: 300,
+      width: '90%',
       
     },
     addWrapper: {
-      width:50,
-      height:50,
+      width:47.6,
+      height:47.6,
       backgroundColor: '#e6e6e6',
-      borderRadius:50,
+      // borderRadius:50,
       justifyContent: 'center',
       alignItems: 'center',
       borderColor: '#c0c0c0',
