@@ -7,8 +7,6 @@ import HotAtCage from './home_features/HotAtCage';
 import DrinkOfTheMonth from './home_features/DrinkOfTheMonth';
 import NewItems from './home_features/NewItems';
 
-// import NavBar from '../NavBar';
-
 
 export default class Home extends Component {
     constructor (props) {
@@ -41,6 +39,14 @@ export default class Home extends Component {
                     <NewItems/>             
                 </ScrollView>
                 {/* <NavBar/> */}
+            </View>
+
+            <View style={styles.nav}>
+              <Button title="🏠"
+                onPress={() => this.props.navigation.navigate('Home')}/>
+              <Button title="💬"
+                onPress={() => this.props.navigation.navigate('CafComments')}/>
+
             </View>
             
         </View>

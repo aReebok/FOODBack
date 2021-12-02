@@ -13,12 +13,14 @@ export default class Comment extends Component {
     render() {
         return (
             <View style={styles.comment}>
+                
                 <View style={styles.itemLeft}>
                     <Text>{this.props.text}</Text>
                 </View>
                 <View style={styles.itemRight}>
-                    <Text>LIKES/DISLIKES</Text>
+                    <Text>likes/dislikes</Text>
                 </View>
+
             </View>
         )
     }
@@ -29,9 +31,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 20,
-        marginBottom: 20,
-        backgroundColor: '#e6e6e6',
+        padding: 15,
+        marginHorizontal: -10,
+
+        marginBottom: 10,
+        backgroundColor: 'white',
         // flexWrap: 'wrap',
         // borderRadius: 10,
     },
@@ -46,3 +50,10 @@ const styles = StyleSheet.create({
         paddingLeft:10,
     }
 });
+
+// const vertLine = <View
+// style={{
+//   borderBottomColor: 'black',
+//   borderBottomWidth: 1,
+// }}/>
+
