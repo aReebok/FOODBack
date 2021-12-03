@@ -2,10 +2,6 @@ import {StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
 
-<<<<<<< HEAD:library/home_features/styles.js
-
-=======
->>>>>>> d9fcb0b (Fixes merge conflicts):home_features/styles.js
     container: {
         flex: 1,
     
