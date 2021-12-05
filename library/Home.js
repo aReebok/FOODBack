@@ -17,11 +17,30 @@ export default class Home extends Component {
         home: 'https://i.imgur.com/0X9HmIa.jpeg',
         cage: 'https://i.imgur.com/fYq5Hfx.png',
         stav: 'https://i.imgur.com/NeA5Yco.png',
+        url: 'http://10.42.231.225:3001',
+
 
         fontLoaded: false
       }
     }
+    
 
+    handlePress = (op, method = '', params = {}) => {
+      if (method != '')
+          params.method = method;
+      fetch(this.state.url + '/'+op, params)
+          .then((response) => response.text())
+          .then((responseText) => {
+              alert(`
+                  Sent:  op=${JSON.stringify(op)}\nparams+method=${
+    JSON.stringify(params)}\n
+                  Received:  ${responseText}`);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+    }
+    
     render() {
       return (
         <View style={styles.container}>
@@ -35,6 +54,9 @@ export default class Home extends Component {
                 <ScrollView style={styles.scrollView}>
                     <CafRating/>
                     <HotAtCage/>
+                    <Button
+                        color='green' title='Click to see value of first User ID'
+                        onPress={() => this.handlePress('firstUID', 'GET')} />
                     <DrinkOfTheMonth/>       
                     <NewItems/>             
                 </ScrollView>

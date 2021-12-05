@@ -6,6 +6,23 @@ import Comment from './comment_feature/Comment'
 
 
 function CafComments(props) {
+    
+    const handlePress = (op, method = '', params = {}) => {
+        if (method != '')
+            params.method = method;
+        fetch(this.state.url + '/'+op, params)
+            .then((response) => response.text())
+            .then((responseText) => {
+                alert(`
+                    Sent:  op=${JSON.stringify(op)}\nparams+method=${
+      JSON.stringify(params)}\n
+                    Received:  ${responseText}`);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+      }
+
     const [comment, setComment] = useState();
     const [commentItems, setCommentItems] = useState([]);
 
@@ -16,7 +33,7 @@ function CafComments(props) {
         setComment(null);   // empties the input bar
     }
 
-
+    
     let app_logo = {
         uri: 'https://i.imgur.com/dt5dJEI.png'
     };
