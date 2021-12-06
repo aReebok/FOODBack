@@ -15,7 +15,7 @@ export default class CafRating extends Component {
                 
                 <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Text> {'\t'}Based on Caf feedback: </Text>
-                    <Text style={styles.progbar}>██████▁▁▁▁▁▁	 </Text>
+                    <Text style={styles.progbar}>█████████<Text style={styles.progbar2}>████</Text>	 </Text>
                     {/* <Text style={styles.progbar}>██████▁▁▁▁▁▁	 </Text> */}
                 </View>
             </View>

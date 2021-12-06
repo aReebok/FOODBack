@@ -19,7 +19,7 @@ export default class Home extends Component {
         stav: 'https://i.imgur.com/NeA5Yco.png',
         url: 'http://10.42.231.225:3001',
 
-
+        loaded_comments: ['HELLO'],
         fontLoaded: false
       }
     }
@@ -40,6 +40,30 @@ export default class Home extends Component {
               console.error(error);
           });
     }
+
+    
+    handlePressComments = (op, method = '', params = {}) => {
+      if (method != '')
+          params.method = method;
+      fetch(this.state.url + '/'+op, params)
+          .then((response) => response.text())
+          .then((responseText) => {
+            let comments = responseText.split('\"');  
+            let len = comments.length;
+            let arr = [];
+            for (let i = 3; i <= len; i++) {
+              arr.push(comments[i]);
+              i += 3;
+            }
+            this.loaded_comments = arr;
+            // alert(this.loaded_comments);
+            this.props.navigation.navigate('CafComments');
+
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+  }
     
     render() {
       return (
@@ -54,9 +78,9 @@ export default class Home extends Component {
                 <ScrollView style={styles.scrollView}>
                     <CafRating/>
                     <HotAtCage/>
-                    <Button
+                    {/* <Button
                         color='green' title='Click to see value of first User ID'
-                        onPress={() => this.handlePress('firstUID', 'GET')} />
+                        onPress={() => this.handlePress('firstUID', 'GET')} /> */}
                     <DrinkOfTheMonth/>       
                     <NewItems/>             
                 </ScrollView>
@@ -66,7 +90,9 @@ export default class Home extends Component {
             <View style={styles.nav}>
               <Button title="🏠"
                 onPress={() => this.props.navigation.navigate('Home')}/>
-              <Button title="💬"
+              {/* <Button title="💬"
+                onPress={() => this.handlePressComments('comments','GET')}/> */}
+                <Button title="💬"
                 onPress={() => this.props.navigation.navigate('CafComments')}/>
 
             </View>

@@ -22,11 +22,11 @@ export default class Login extends Component {
                 login = login.split(':');
                 // alert(login[1]);
                 if (login[1] == `"1"}`) {
-                    console.log("yes");
+                    console.log("Correct password... logging in...");
                     // MOVE ON TO HOME PAGE
                     return this.props.navigation.navigate('Home'); 
                 } else {
-                    console.log("no");
+                    console.log("Incorrect password.");
                     // display wrong input 
                     alert("Wrong information inputed; try again.");
                 }

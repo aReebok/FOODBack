@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 let count = 0;
 let namesList = [];
+let uid = null;
 
 // handle requests
 
@@ -28,11 +29,14 @@ let namesList = [];
 // 	       }));
 // })
 
-app.get('/firstUID', (request, response) => {
-    console.log(`Got request for firstUID, sending ${count}`);
-    pool.query("SELECT pin FROM users WHERE username = $1",['Areeba'])
+app.get('/uid', (request, response) => {
+    console.log(`Got request for uid, `);
+	let username = request.body.username;
+    let data = username.split(',');
+    pool.query("SELECT uid FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]])
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
+		uid = res.rows[0];
 	    response.send(res.rows[0]);
 	})
 	.catch(err =>
@@ -105,19 +109,21 @@ app.put('/count/reset', (request, response) => {
 	       }));
 })
 
-// RETRIEVE names - send array of all names in button_names table
+// RETRIEVE comments - send array of all names in button_names table
 
-app.get('/names', (request, response) => {
-    console.log(`Got request for names`);
-    pool.query('SELECT * FROM button_names ORDER BY nid')
+app.get('/comments', (request, response) => {
+    console.log(`Got request for comments`);
+    pool.query('SELECT comment, date, votes FROM comments ORDER BY votes desc')
 	.then(res => {
 	    let arr = [];
 	    console.log('DB response: ');
+		
 	    res.rows.forEach(val => {
-		console.log(val);
-		arr.push(val.name);
+
+			console.log(val);
+			arr.push(val);
 	    });
-	    response.send({names: arr})
+	    response.send(arr)
 	})
 	.catch(err =>
 	       setImmediate(() => {
@@ -129,12 +135,12 @@ app.get('/names', (request, response) => {
 // body parameters:
 //	name	string	name value to be inserted
 
-app.post('/names', (request, response) => {
-    let name = request.body.name;
+app.post('/comments', (request, response) => {
+    let comment = request.body.comment;
     console.log(request.body)
-    console.log(request.body.name)
-    console.log(`Got request to add a name, will add ${name} to database`);
-    pool.query('INSERT INTO button_names (name) VALUES ($1)', [name])
+    console.log(request.body.comment)
+    console.log(`Got request to add a comment, will add ${comment} to database`);
+    pool.query('INSERT INTO comments (comment) VALUES ($1)', [comment])
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
 	    response.sendStatus(200)

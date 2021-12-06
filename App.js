@@ -7,6 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CafComments from './library/CafComments';
 import Home from './library/Home';
 import Login from './library/Login';
+import LikeButton from './LikeButton';
+// import CafComments from './library/CafComments';
 
 const Stack = createStackNavigator();
 
@@ -48,13 +50,7 @@ export default class MyApp extends Component {
               <Stack.Screen name="CafComments" component={CafComments}/>
              </Stack.Navigator>      
         </NavigationContainer>
-      // <View style={{paddingTop: 50, paddingLeft: 50 }}>
-      //     <Button
-      //     color='green' title='Click to see value of first User ID'
-      //     onPress={() => this.handlePress('firstUID', 'GET')} />
-
-      // </View> 
-      // <CafComments/>
+        // <LikeButton/>
       )
   }
 }

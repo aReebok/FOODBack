@@ -9,10 +9,10 @@ export default StyleSheet.create({
       },
     
       header1: {
-        flex: 0.1,
+        flex: 0,
         backgroundColor: '#cc8009',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'row-reverse',
+        // justifyContent: 'center',
       },
       header2: {
         flex: 1.3,
@@ -40,7 +40,14 @@ export default StyleSheet.create({
         flexDirection:'row',
     
       },
+      nav2: {
+        flex: 0.105, 
+        backgroundColor: '#cc8009',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        flexDirection:'row',
     
+      },
       text: {
         // padding: 10,
         fontSize: 20,
@@ -61,6 +68,10 @@ export default StyleSheet.create({
       progbar: {
         fontSize: 12,
         color: 'green',
+      },
+      progbar2: {
+        fontSize: 12,
+        color: 'red',
       },
 
     image: {
@@ -109,4 +120,13 @@ export default StyleSheet.create({
       borderWidth: 1,
     },
     addText: {},
+
+    cafHeader:{
+      flex:1,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+
+
+    /// REFRESH BUTTON header
 });
