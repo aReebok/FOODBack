@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { View, Text, Button } from 'react-native';
 
 export default class LikeButton extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			liked: false
 		};
