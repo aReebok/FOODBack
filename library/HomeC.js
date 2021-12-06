@@ -4,7 +4,7 @@ import Carousel from '../component/Carousel'
 import { dummyData } from '../data/Data'
 
 
-const Home = ({navigation}) =>{
+const HomeC = ({navigation}) =>{
     return (
         <View>
             <Carousel data = {dummyData}/>
