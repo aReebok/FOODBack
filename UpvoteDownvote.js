@@ -8,6 +8,7 @@ export default class UpDown extends Component {
 			upVote: false,
 			downVote: false,
 			selectedButton: '',
+			vote_count: 5,
 		};
 		this.handleUpvote = this.handleUpvote.bind(this);
 		this.handleDownvote = this.handleDownvote.bind(this);
@@ -18,6 +19,7 @@ export default class UpDown extends Component {
 			selectedButton: 'Upvote',
 			upVote: !this.state.upVote,
 			downVote: false,
+			vote_count: this.state.vote_count + 1
 		});
 	}
 	
@@ -26,25 +28,24 @@ export default class UpDown extends Component {
 			selectedButton: 'Downvote',
 			downVote: !this.state.downVote,
 			upVote: false,
+			vote_count: this.state.vote_count - 1
 		});
 	}
-
+		
 	render() {
-		const check_up = this.state.upVote ? 'pressed' : 'not pressed';
-		const check_down = this.state.downVote ? 'pressed' : 'not pressed';
+		var vote_count = this.state.vote_count;
 		return (
 			<View style={styles.container}>
 				<TouchableOpacity 
-					style={{backgroundColor: this.state.selectedButton === 'Upvote' ? 'lightblue' : 'gray', padding: 15}}
+					style={{backgroundColor: this.state.selectedButton === 'Upvote' ? 'gray' : 'gray', padding: 15}}
 					onPress={() => this.handleUpvote()}>
 					<Text style={styles.text}> + </Text>
 				</TouchableOpacity>
 				
-				<Text>{check_up} </Text>
-				<Text>{check_down} </Text>
+				<Text> {vote_count} </Text>
 				
 				<TouchableOpacity 
-					style={{backgroundColor: this.state.selectedButton === 'Downvote' ? 'lightblue' : 'gray', padding: 15}}
+					style={{backgroundColor: this.state.selectedButton === 'Downvote' ? 'gray' : 'gray', padding: 15}}
 					onPress={() => this.handleDownvote()}>
 					<Text style={styles.text}> - </Text>
 				</TouchableOpacity>
