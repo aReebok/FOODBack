@@ -17,8 +17,8 @@ export default class NewItems extends Component {
                 <Text style={styles.text}> 
                     NEW ITEMS!
                 </Text>
-                <Text>Nothign here for now!</Text>
-                <Text>Check back later :D</Text>
+                <Text>    Nothing here for now!</Text>
+                <Text>    Check back later :D</Text>
             </View>
         )
     }

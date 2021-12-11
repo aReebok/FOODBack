@@ -1,4 +1,4 @@
-import React from 'react-native'
+import React from 'react'
 import { View, StyleSheet, Text, Image, Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CarouselItem
+export default CarouselItem;

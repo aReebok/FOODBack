@@ -14,29 +14,38 @@ let uid = null;
 
 // handle requests
 
-// RETRIEVE count - send value of first row of button_count table
 
-// app.get('/count', (request, response) => {
-//     console.log(`Got request for count, sending ${count}`);
-//     pool.query('SELECT count FROM button_count')
-// 	.then(res => {
-// 	    console.log('DB response: ' + res.rows[0]);
-// 	    response.send(res.rows[0]);
-// 	})
-// 	.catch(err =>
-// 	       setImmediate(() => {
-// 		   throw err;
-// 	       }));
-// })
+
+app.get('/hot_at_cage', (request, response) => {
+    console.log(`Got request for hot_at_cage items`);
+    pool.query(" SELECT DISTINCT item from cagemenu where category = 'food/sandwich' FETCH FIRST 3 ROWS ONLY") // 3 foods, and three bevs. 
+	.then(res => {
+	    let arr = [];
+	    console.log('DB response: ');
+		
+	    res.rows.forEach(val => {
+
+			console.log(val);
+			arr.push(val);
+	    });
+	    response.send(arr)
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+
+// RETRIEVE count - send value of first row of button_count table
 
 app.get('/uid', (request, response) => {
     console.log(`Got request for uid, `);
-	let username = request.body.username;
-    let data = username.split(',');
-    pool.query("SELECT uid FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]])
+    pool.query("SELECT uid FROM users WHERE username = 'Inna' AND pin = '3456'")
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
 		uid = res.rows[0];
+		console.log('userid: ' + uid);
 	    response.send(res.rows[0]);
 	})
 	.catch(err =>
@@ -45,16 +54,9 @@ app.get('/uid', (request, response) => {
 	       }));
 })
 
-// app.get('/login', (request, response) => {
-//     console.log(`Got request for login`);
-//     pool.query("SELECT COUNT(*) FROM users WHERE username = '$1' AND pin = '$2'")
-//     .then(res => {
-        
-//     })
-// })
 app.put('/login', (request, response) => {
-    let username = request.body.username;
-    let data = username.split(',');
+	let login_info = request.body.login_info;
+    let data = login_info.split(',');
     console.log("SELECT COUNT(*) FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]]);
     pool.query("SELECT COUNT(*) FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]])
     .then(res => {
@@ -113,7 +115,7 @@ app.put('/count/reset', (request, response) => {
 
 app.get('/comments', (request, response) => {
     console.log(`Got request for comments`);
-    pool.query('SELECT comment, date, votes FROM comments ORDER BY votes desc')
+    pool.query('SELECT comment, date, votes, neg_feedback FROM comments ORDER BY votes desc')
 	.then(res => {
 	    let arr = [];
 	    console.log('DB response: ');
@@ -137,10 +139,15 @@ app.get('/comments', (request, response) => {
 
 app.post('/comments', (request, response) => {
     let comment = request.body.comment;
+	let fb = request.body.feedback;
+	if (fb == 'false') {
+		fb = 'green';
+	} else { fb = 'red'; }
+
     console.log(request.body)
     console.log(request.body.comment)
     console.log(`Got request to add a comment, will add ${comment} to database`);
-    pool.query('INSERT INTO comments (comment) VALUES ($1)', [comment])
+    pool.query('INSERT INTO comments (comment, neg_feedback) VALUES ($1, $2)', [comment, fb])
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
 	    response.sendStatus(200)
@@ -150,6 +157,28 @@ app.post('/comments', (request, response) => {
 		   throw err;
 	       }));
 })
+
+
+
+//;
+app.get('/green/red', (request, response) => {
+    console.log(`Got request for green and red`);
+    pool.query('select neg_feedback, COUNT(*) FROM comments GROUP BY neg_feedback')
+	.then(res => {
+	    let arr = [];
+	    console.log('DB response: ');
+	    res.rows.forEach(val => {
+		console.log(val);
+		arr.push(val.neg_feedback + '|' + val.count);
+	    });
+	    response.send({name_val: arr})
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
 
 // DELETE names - delete all rows of button_names table with matching names
 // body parameters:
@@ -227,3 +256,6 @@ console.log(`Connected to database ${dbName} on ${dbHost}`);
 console.log("IP addresses:  ", lib.getIPAddresses());
 
 module.exports = app;
+
+
+//async, await 

@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
     dotView: { flexDirection: 'row', justifyContent: 'center' }
 })
 
-export default Carousel
+export default Carousel;

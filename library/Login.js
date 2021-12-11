@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, Button, View, TextInput } from 'react-native';
+import { Image, StyleSheet, Text, Button, View, TextInput } from 'react-native';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            app_icon: 'https://i.imgur.com/qlrJbhC.png',
             url: 'http://10.42.231.225:3001',
             formContentType: "application/x-www-form-urlencoded;charset=UTF-8", 
             username: 'username',
@@ -39,7 +40,8 @@ export default class Login extends Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text style={{padding: 10,}}>Welcome to FOODBack</Text>
+                <Image source={{uri: this.state.app_icon}} style={{margin: 10, width: '40%', aspectRatio: 1,}} />
+                {/* <Text style={{padding: 10,}}>Welcome to FOODBack</Text> */}
                 <TextInput 
                     style={styles.input} 
                     placeholder={'Enter username'}
@@ -48,22 +50,15 @@ export default class Login extends Component {
                     style={styles.input} 
                     placeholder={'Enter pin'} 
                     onChangeText={(pin) => this.setState({pin}) }/>
-                {/* <Button
-                    color='black' title='LOGIN'
-                    onPress={() => this.handlePress('login', 'GET', {
-                        headers: {
-                            "Content-type": this.state.formContentType
-                        },
-                        body: 'pin=${this.state}'
-                     }
-                    )} /> */}
                     <Button
                         title='LOGIN'
+                        color='#664004'
                         onPress={() => this.handlePress('login', 'PUT', {
                             headers: {
                             "Content-type": this.state.formContentType
                             }, 
-                        body: `username=${this.state.username},${this.state.pin}`
+                        body: `login_info=${this.state.username},${this.state.pin}`
+
                         }
                     )}/>
             </View>
@@ -75,17 +70,18 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 100,
         flex: 1,
-        backgroundColor:'orange',
+        backgroundColor:'white',
         alignItems: 'center',
         // justifyContent: 'center'
         // backgroundColor: '',
     },
     input:{
         // padding: 10,
+        margin: 5,
         paddingVertical:15,
         paddingHorizontal: 15,
-        backgroundColor: '#e6e6e6',
-        borderColor: '#c0c0c0',
+        backgroundColor: '#d6993a',
+        borderColor: 'black',
         borderWidth: 1,
   
         width: '60%',

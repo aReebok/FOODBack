@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Text} from 'react-native'
-import Carousel from '../component/Carousel'
-import { dummyData } from '../data/Data'
+import Carousel from './Carousel'
+import { dummyData } from './Data'
 
 
 const HomeC = ({navigation}) =>{
@@ -12,4 +12,4 @@ const HomeC = ({navigation}) =>{
     )
 }
 
-export default HomeC
+export default HomeC;
