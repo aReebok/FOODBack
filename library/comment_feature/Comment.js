@@ -2,37 +2,36 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 
-export default class Comment extends Component {
+function Comment (props) {
     /*A section that includes the 3 newest items at cage
          that have been entered in the database - updates 
          as newer items entered */ 
-    constructor (props) {
-        super(props);
-    }
+    return (
+        <View style={styles.comment}>
+            
+            <View style={styles.itemLeft}>
 
-    render() {
-        return (
-            <View style={styles.comment}>
+                <View>
+                    <Text style={{fontWeight:'bold', color: props.color}}>●
+                    <Text style={{color:'black'}}>  {props.text}</Text></Text>
+                </View>
+            </View>
+            <View style={styles.itemRight}>
+                <View style={styles.date}>
+                    <Text style={{paddingBottom: 10, fontSize:12,}}>{props.date}</Text>    
+                </View>
+                <View style={styles.votes}>
+                    <Text>⇧</Text>
+                    <Text style={{fontSize:12, fontWeight: 'bold'}}>{props.votes}</Text>
+                    <Text>⇩</Text>
+                </View>
                 
-                <View style={styles.itemLeft}>
-                    <Text style={{fontWeight:'bold',}}>{this.props.text}</Text>
-                </View>
-                <View style={styles.itemRight}>
-                    <View style={styles.date}>
-                        <Text style={{paddingBottom: 10,}}>2021/12/6</Text>    
-                    </View>
-                    <View style={styles.votes}>
-                        <Text>⇧</Text>
-                        <Text>0</Text>
-                        <Text>⇩</Text>
-                    </View>
-                    
-
-                </View>
 
             </View>
-        )
-    }
+
+        </View>
+    );
+
 }
 
 const styles = StyleSheet.create({
@@ -50,6 +49,7 @@ const styles = StyleSheet.create({
     },
     itemLeft:{
         flex: 4.5,
+        flexDirection: 'column',
         alignItems: 'center', //align items according to this parent (like setting self align on each item)
         justifyContent: 'center',
         flexWrap: 'wrap'    
@@ -80,3 +80,5 @@ const styles = StyleSheet.create({
 //   borderBottomWidth: 1,
 // }}/>
 
+
+export default Comment;

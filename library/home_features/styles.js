@@ -17,7 +17,7 @@ export default StyleSheet.create({
       header2: {
         flex: 1.3,
         backgroundColor: '#cc8009',
-        paddingBottom: 10,
+        paddingVertical: 10,
         alignItems: 'center',
         justifyContent: 'center',
       },
@@ -65,6 +65,11 @@ export default StyleSheet.create({
 
       },
     
+      cafView:{
+        flex:10,
+        backgroundColor:'orange',
+      },
+
       progbar: {
         fontSize: 12,
         color: 'green',
@@ -92,10 +97,12 @@ export default StyleSheet.create({
     writeCommentWrapper: {
       position: 'absolute',
       bottom: 0,
-      width: '100%',
+      width: '97%',
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
+      backgroundColor: '#e6e6e6',
+      paddingLeft: 5,
     },
     
     input:{
@@ -105,12 +112,13 @@ export default StyleSheet.create({
       // borderRadius: 60,
       borderColor: '#c0c0c0',
       borderWidth: 1,
-
+      color: 'green',
+      fontWeight: 'bold',
       width: '90%',
       
     },
     addWrapper: {
-      width:47.6,
+      width:45.6,
       height:47.6,
       backgroundColor: '#e6e6e6',
       // borderRadius:50,

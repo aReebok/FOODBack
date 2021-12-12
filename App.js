@@ -6,9 +6,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import CafComments from './library/CafComments';
 import Home from './library/Home';
+// import Demo from './library/Demo';
 import Login from './library/Login';
 import LikeButton from './LikeButton';
-// import CafComments from './library/CafComments';
+import CafFlirts from './library/CafFlirts'
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,6 @@ export default class MyApp extends Component {
     this.state = {
       url: 'http://10.42.231.225:3001',
     };
-
   }
 
   handlePress = (op, method = '', params = {}) => {
@@ -44,14 +44,14 @@ export default class MyApp extends Component {
   render() {
     return (
       <NavigationContainer>
-           <Stack.Navigator>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Home" component={Home} />
-              <Stack.Screen name="CafComments" component={CafComments}/>
-             </Stack.Navigator>      
-        </NavigationContainer>
-        // <LikeButton/>
-      )
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="CafComments" component={CafComments}/>
+          <Stack.Screen name="CafFlirts" component={CafFlirts}/>
+        </Stack.Navigator>      
+      </NavigationContainer>
+    );
   }
 }
 
