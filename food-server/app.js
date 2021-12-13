@@ -14,8 +14,6 @@ let uid = null;
 
 // handle requests
 
-
-
 app.get('/hot_at_cage', (request, response) => {
     console.log(`Got request for hot_at_cage items`);
     pool.query(" SELECT DISTINCT item from cagemenu where category = 'food/sandwich' FETCH FIRST 3 ROWS ONLY") // 3 foods, and three bevs. 
@@ -58,9 +56,14 @@ app.put('/login', (request, response) => {
 	let login_info = request.body.login_info;
     let data = login_info.split(',');
     console.log("SELECT COUNT(*) FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]]);
-    pool.query("SELECT COUNT(*) FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]])
+    pool.query("SELECT uid FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]])
     .then(res => {
 	    console.log('DB response: ' + res.rows[0]);
+		// if (res.rows[0] == 'undefined') { 
+		// 	console.log('entered undefined');
+		// 	alert("Wrong information inputed; try again.");  
+		// 	return;
+		// }
 	    response.send(res.rows[0]);
 	})
 	.catch(err =>
@@ -68,42 +71,19 @@ app.put('/login', (request, response) => {
 		   throw err;
 	       }));
 })
-// UPDATE count - increment value in first row of button_count table
-/* Optional technical note:  HTTP PUT requests should be "idempotent" - 
-   i.e., repeatable.  This implemenation, where the SQL command increments 
-   count, does not adhere to that standard usage.  
-     * Incrementing in the front end application (after retrieving the 
-       prior count value) would be more complicated but would adhere to 
-       the HTTP norm.  
-     * HTTP POST is the only HTTP operation that doesn't need to be idempotent,
-       (so could alternatively be used from an HTTP viewpoint;  but that 
-       differs from our choice of HTTP PUT for REST Update...)
-   For this class, we will allow either PUT (for idempotent actions) or POST 
-   (for non-idempotent actions) for implementing REST Update operations */
+/* REGISTRATION */
+app.post('/register', (request, response) => {
+	// let login_info = request.body.login_info;
+    // let data = login_info.split(',');
+	let username = request.body.username;
+	let pin = request.body.pin;
+	//pool.query('INSERT INTO comments (comment, neg_feedback) VALUES ($1, $2)', [comment, fb])
 
-app.post('/count', (request, response) => {
-    // count++;
-    console.log(`Got request to increment count, will add 1 in database`);
-    pool.query('UPDATE button_count SET count = count + 1')
-	.then(res => {
+    console.log("INSERT INTO users (username, pin) VALUES ($1, $2)", [username, pin]);
+    pool.query("INSERT INTO users (username, pin) VALUES ($1, $2)", [username, pin])
+    .then(res => {
 	    console.log('DB response: ' + res.rows[0]);
-	    response.sendStatus(200)
-	})
-	.catch(err =>
-	       setImmediate(() => {
-		   throw err;
-	       }));
-})
-
-// UPDATE count - RESET value in first row of button_count table to 0
-
-app.put('/count/reset', (request, response) => {
-    // count++;
-    console.log(`Got request to reset count, will assign to 0 in database`);
-    pool.query('UPDATE button_count SET count = 0')
-	.then(res => {
-	    console.log('DB response: ' + res.rows[0]);
-	    response.sendStatus(200)
+	    response.send(res.rows[0]);
 	})
 	.catch(err =>
 	       setImmediate(() => {
@@ -115,7 +95,29 @@ app.put('/count/reset', (request, response) => {
 
 app.get('/comments', (request, response) => {
     console.log(`Got request for comments`);
-    pool.query('SELECT comment, date, votes, neg_feedback FROM comments ORDER BY votes desc')
+    pool.query('SELECT comment, date, votes, neg_feedback, uid, cid FROM comments ORDER BY votes desc')
+	.then(res => {
+	    let arr = [];
+	    console.log('DB response: ');
+		
+	    res.rows.forEach(val => {
+
+			console.log(val);
+			arr.push(val);
+	    });
+	    response.send(arr)
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+// RETRIEVE photos - send array of all names in button_names table
+
+app.get('/photos', (request, response) => {
+    console.log(`Got request for all photos`);
+    pool.query('SELECT * FROM photos ORDER BY pid desc')
 	.then(res => {
 	    let arr = [];
 	    console.log('DB response: ');
@@ -140,6 +142,7 @@ app.get('/comments', (request, response) => {
 app.post('/comments', (request, response) => {
     let comment = request.body.comment;
 	let fb = request.body.feedback;
+	let userid = request.body.uid;
 	if (fb == 'false') {
 		fb = 'green';
 	} else { fb = 'red'; }
@@ -147,7 +150,7 @@ app.post('/comments', (request, response) => {
     console.log(request.body)
     console.log(request.body.comment)
     console.log(`Got request to add a comment, will add ${comment} to database`);
-    pool.query('INSERT INTO comments (comment, neg_feedback) VALUES ($1, $2)', [comment, fb])
+    pool.query('INSERT INTO comments (comment, neg_feedback, uid) VALUES ($1, $2, $3)', [comment, fb, userid])
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
 	    response.sendStatus(200)
@@ -158,6 +161,22 @@ app.post('/comments', (request, response) => {
 	       }));
 })
 
+// CREATE photo posts
+app.post('/photos', (request, response) => {
+    let url = request.body.url;
+	let userid = request.body.uid;
+
+    console.log(`Got request to add a photo, will add ${url} to database`);
+    pool.query('INSERT INTO photos (url, uid) VALUES ($1, $2)', [url, userid])
+	.then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+	    response.sendStatus(200)
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
 
 
 //;
@@ -184,12 +203,26 @@ app.get('/green/red', (request, response) => {
 // body parameters:
 //	name	string	name value to be deleted
 
-app.delete('/names', (request, response) => {
-    let name = request.body.name;
-    console.log(request.body)
-    console.log(request.body.name)
-    console.log(`Got request to delete matching names, will remove ${name} from database`);
-    pool.query('DELETE FROM button_names WHERE name = $1', [name])
+
+app.delete('/comments', (request, response) => {
+    let cid = request.body.cid;
+    console.log(`Got request to delete matching comments, will remove ${cid} from database`);
+    pool.query('DELETE FROM comments WHERE cid = $1', [cid])
+	.then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+	    response.sendStatus(200)
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+app.delete('/photos', (request, response) => {
+    let pid = request.body.pid;
+    
+    console.log(`Got request to delete matching photo, will remove ${pid} from database`);
+    pool.query('DELETE FROM photos WHERE pid = $1', [pid])
 	.then(res => {
 	    console.log('DB response: ' + res.rows[0]);
 	    response.sendStatus(200)

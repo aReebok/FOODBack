@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { View, Text, Button } from 'react-native';
 
 export default class LikeButton extends Component {
-	constructor(props) {
-		super(props);
+	constructor() {
+		super();
 		this.state = {
 			liked: false
 		};
@@ -20,7 +20,7 @@ export default class LikeButton extends Component {
 		const text = this.state.liked ? 'liked' : 'haven\'t liked';
 		const label = this.state.liked ? 'Like' : 'Unlike';
 		return (
-			<View style={{paddingTop: 50, paddingLeft: 50 }}>
+			<View style={{paddingTop: 100, paddingLeft: 50 }}>
 				<Button onPress={() => this.handlePress()}
 					title = {label} />
 				<Text>you {text} this. </Text>

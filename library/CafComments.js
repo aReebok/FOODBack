@@ -56,7 +56,7 @@ function CafComments(props) {
                 arr.push(comment);
                 if (checkboxState == true) { arr.push('red'); } else { arr.push('green')}
                 arr.push(0);
-                arr.push(`2021-00-00`);
+                arr.push(`2021-11-11`);
                 setCommentItems([...commentItems, arr]);
                 setComment(null);
 
@@ -88,6 +88,8 @@ function CafComments(props) {
                 let date = `${responseText[i].date}`; 
                 date = date.substr(0, 10);
                 arr.push(date);
+                arr.push(`${responseText[i].uid}`)
+                arr.push(`${responseText[i].cid}`)
                 twod_arr.push(arr);
                 }
 
@@ -123,7 +125,8 @@ function CafComments(props) {
 
                     <View style={styles.section}>
                         <View style={styles.cafHeader}>
-                            <Text style={styles.text}>{props.route.params.text_hello}</Text>
+                            <Text style={styles.text}>Caf Comments</Text>
+                            {/* <Text>user id: {uid}</Text> */}
                             
                             <Button color="black"  title="⟳" 
                                 onPress={() => handlePressComments('comments','GET')}/>
@@ -138,11 +141,10 @@ function CafComments(props) {
                         <View style={styles.comments}>
                             {/* This is where one comment will be */}
                             
-                            
                             {
                                 // console.log(commentItems);
                                 commentItems.map((item, index) => {    
-                                     return <Comment key={index} text={`${item[0]}`} color={`${item[1]}`} votes={`${item[2]}`} date={`${item[3]}`} />
+                                     return <Comment key={index} text={`${item[0]}`} color={`${item[1]}`} votes={`${item[2]}`} date={`${item[3]}`} post_uid={`${item[4]}`} cid={`${item[5]}`} />
                                      })
                             }
 
@@ -173,7 +175,7 @@ function CafComments(props) {
                         headers:{
                             "Content-type": formContentType
                         },
-                        body: `comment=${comment}&feedback=${checkboxState}`
+                        body: `comment=${comment}&feedback=${checkboxState}&uid=${uid}`
                     })}>
                     
                     
@@ -188,7 +190,9 @@ function CafComments(props) {
             <View style={styles.nav}>
                     <Button title="🏠"
                         onPress={() => props.navigation.navigate("Home")}/>   
-                    <Button title="💬"/>   
+                    <Button title="💬"/> 
+                    <Button title="🖼️"
+                        onPress={() => props.navigation.navigate('FoodGallery')}/>  
                     <Button title="🖤"
                          onPress={() => props.navigation.navigate('CafFlirts')}/>
             </View>

@@ -6,10 +6,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import CafComments from './library/CafComments';
 import Home from './library/Home';
-// import Demo from './library/Demo';
 import Login from './library/Login';
 import LikeButton from './LikeButton';
 import CafFlirts from './library/CafFlirts'
+import Register from './library/Register'
+import FoodGallery from './library/FoodGallery';
 
 const Stack = createStackNavigator();
 
@@ -38,16 +39,15 @@ export default class MyApp extends Component {
   }
 
 
-//10.42.231.225
-
-
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="CafComments" component={CafComments}/>
+          <Stack.Screen name="FoodGallery" component={FoodGallery}/>
           <Stack.Screen name="CafFlirts" component={CafFlirts}/>
         </Stack.Navigator>      
       </NavigationContainer>

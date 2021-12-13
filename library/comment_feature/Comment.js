@@ -1,11 +1,70 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { Component, useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 
 function Comment (props) {
     /*A section that includes the 3 newest items at cage
          that have been entered in the database - updates 
          as newer items entered */ 
+
+    const url = 'http://10.42.231.225:3001';
+    const formContentType = "application/x-www-form-urlencoded;charset=UTF-8";
+
+
+    const [trash, setTrash] = useState('');
+
+    const onLoad = ( ) => {
+        console.log("loading comment: " + props.cid);
+        console.log("uid: " + uid);
+        console.log("postuid:" + props.cid)
+
+        if(props.post_uid == uid) {
+            // update trash 
+            setTrash('x');        
+        } else { setTrash('') }
+    }
+
+    useEffect(() => {
+        onLoad();
+    }, []);
+
+
+    const handleDeleteComment = (op, method = '', params = {}) => {
+        if (method != '')
+            params.method = method;
+	console.log(`received request ${op}, ${method}`)
+        fetch(url + '/'+op, params)
+            .then((response) => response.text())
+            .then((responseText) => {
+		console.log(`response text: ${responseText}`)
+            //     alert(`
+            //         Sent:  op=${JSON.stringify(op)}\nparams+method=${
+			// JSON.stringify(params)}\n
+            //         Received:  ${responseText}`);
+            alert("Comment deleted. Refresh the page.");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    // const handleDeleteComment 
+
+    const deleteComment = ( ) => {
+        if (props.post_uid == uid) {
+            setTrash('');
+            // DELETE item: 
+            handleDeleteComment('comments', 'DELETE', {
+                    headers: {
+                        "Content-type": formContentType
+                    }, 
+                        body: `cid=${props.cid}`
+                    }
+            
+            );
+        }
+    }
+
     return (
         <View style={styles.comment}>
             
@@ -17,8 +76,16 @@ function Comment (props) {
                 </View>
             </View>
             <View style={styles.itemRight}>
+                {/* <Text>🗑️</Text> */}              
+
                 <View style={styles.date}>
-                    <Text style={{paddingBottom: 10, fontSize:12,}}>{props.date}</Text>    
+                    <Text style={{paddingBottom: 10, fontSize:12,}}>{props.date} </Text>    
+                    <View style={{marginTop: -20}}>
+                    <Button 
+                        title={trash}
+                        onPress={() => deleteComment()}
+                        />
+                </View>     
                 </View>
                 <View style={styles.votes}>
                     <Text>⇧</Text>
@@ -48,7 +115,7 @@ const styles = StyleSheet.create({
         // borderRadius: 10,
     },
     itemLeft:{
-        flex: 4.5,
+        flex: 4,
         flexDirection: 'column',
         alignItems: 'center', //align items according to this parent (like setting self align on each item)
         justifyContent: 'center',
@@ -56,7 +123,7 @@ const styles = StyleSheet.create({
     },
     itemRight:{
         flex: 1,
-        paddingLeft:10,
+        paddingRight:10,
         // alignItems: 'center', //align items according to this parent (like setting self align on each item)
         // justifyContent: 'center',   
     },
@@ -64,6 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // direction: 'rtl',
         alignItems: 'flex-end',
+        flexDirection: 'row'
         // paddingBottom: 5,
 
     },

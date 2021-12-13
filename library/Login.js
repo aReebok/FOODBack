@@ -10,6 +10,7 @@ export default class Login extends Component {
             formContentType: "application/x-www-form-urlencoded;charset=UTF-8", 
             username: 'username',
             pin: '0000',
+            uid: 0,
         };
     
       }
@@ -19,18 +20,20 @@ export default class Login extends Component {
         fetch(this.state.url + '/'+op, params)
             .then((response) => response.text())
             .then((responseText) => {
-                let login = `${responseText}`;
-                login = login.split(':');
-                // alert(login[1]);
-                if (login[1] == `"1"}`) {
-                    console.log("Correct password... logging in...");
-                    // MOVE ON TO HOME PAGE
-                    return this.props.navigation.navigate('Home'); 
-                } else {
-                    console.log("Incorrect password.");
+                console.log("res: "  + `${responseText}`);
+                if (`${responseText}` == '') {
+                     console.log("Incorrect password.");
                     // display wrong input 
-                    alert("Wrong information inputed; try again.");
+                    alert("Wrong information inputed; try again.");  
+                    return; 
                 }
+                // set user id and change to home
+                let uid_login = `${responseText.split(":")[1].split('}')[0]}`;
+                this.setState({uid: uid_login})
+                console.log("Correct password... logging in...");
+                console.log("uid: " + this.state.uid);
+                global.uid = this.state.uid;
+                return this.props.navigation.navigate('Home'); 
             })
             .catch((error) => {
                 console.error(error);
@@ -61,6 +64,10 @@ export default class Login extends Component {
 
                         }
                     )}/>
+                    <Button title= 'Register' 
+                    onPress={() => this.props.navigation.navigate('Register') }/>
+                 
+
             </View>
         );
     }

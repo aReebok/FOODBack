@@ -6,6 +6,8 @@ import styles from './home_features/styles'
 // import CafComments from './CafComments';
 
 
+
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -43,6 +45,8 @@ export default class Login extends Component {
                 onPress={() => this.handlePressComments('comments','GET')}/> */}
                 <Button title="💬"
                 onPress={() => this.props.navigation.navigate({name: 'CafComments', params:{text_hello: 'Caf Comments'}})}/>
+             <Button title="🖼️"
+                onPress={() => this.props.navigation.navigate('FoodGallery')}/>
               <Button title="🖤"
                 onPress={() => this.props.navigation.navigate('CafFlirts')}/>
             </View>
