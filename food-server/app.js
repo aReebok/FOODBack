@@ -12,6 +12,101 @@ let count = 0;
 let namesList = [];
 let uid = null;
 
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// HANDLE VOTINGS::::::::::::::::::::::::::::::::::::;;
+
+app.put('/votes', (request, response) => {
+	let uid = request.body.uid;
+	let cid = request.body.cid;
+    console.log("SELECT response FROM votes WHERE cid = $1 AND uid = $2", [cid, uid]);
+    pool.query("SELECT response FROM votes WHERE cid = $1 AND uid = $2", [cid, uid])
+    .then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+		if (res == null) {
+			console.log('RES IS NULL')
+		}
+	    response.send(res.rows[0]);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+app.put('/votes/update', (request, response) => {
+	let cid = request.body.cid;
+	let votes = request.body.votes;
+	console.log("VOTES: ---------------- " + votes)
+
+	console.log("updating votes to: " + votes);
+
+    console.log("UPDATE comments set votes = $2 WHERE cid = $1", [cid, votes]);
+    pool.query("UPDATE comments set votes = $2 WHERE cid = $1", [cid, votes])
+    .then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+	    response.send(res.rows[0]);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+app.post('/votes/add', (request, response) => {
+	let cid = request.body.cid;
+	let uid = request.body.uid;
+	let vote = request.body.response;
+	
+    console.log("INSERT INTO votes (cid, uid, response) VALUES ($1, $2, $3)", [cid, uid, vote]);
+    pool.query("INSERT INTO votes (cid, uid, response) VALUES ($1, $2, $3)", [cid, uid, vote])
+    .then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+	    response.send(res.rows[0]);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+app.put('/votes/switch', (request, response) => {
+	let cid = request.body.cid;
+	let uid = request.body.uid;
+	let vote = request.body.response;
+
+    console.log("UPDATE votes set response = $2 WHERE cid = $1 AND uid = $3", [cid, vote, uid]);
+    pool.query("UPDATE votes set response = $2 WHERE cid = $1 AND uid = $3", [cid, vote, uid])
+    .then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+	    response.send(res.rows[0]);
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+app.delete('/votes/remove', (request, response) => {
+    let cid = request.body.cid;
+	let uid = request.body.uid;
+
+    console.log(`Got request to delete matching comments, will remove ${cid} from database`);
+    pool.query('DELETE FROM votes WHERE cid = $1 AND uid = $2', [cid, uid])
+	.then(res => {
+	    console.log('DB response: ' + res.rows[0]);
+	    response.sendStatus(200)
+	})
+	.catch(err =>
+	       setImmediate(() => {
+		   throw err;
+	       }));
+})
+
+
+
+
+
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // handle requests
 
 app.get('/hot_at_cage', (request, response) => {
@@ -59,11 +154,6 @@ app.put('/login', (request, response) => {
     pool.query("SELECT uid FROM users WHERE username = $1 AND pin = $2", [data[0],data[1]])
     .then(res => {
 	    console.log('DB response: ' + res.rows[0]);
-		// if (res.rows[0] == 'undefined') { 
-		// 	console.log('entered undefined');
-		// 	alert("Wrong information inputed; try again.");  
-		// 	return;
-		// }
 	    response.send(res.rows[0]);
 	})
 	.catch(err =>
@@ -71,6 +161,7 @@ app.put('/login', (request, response) => {
 		   throw err;
 	       }));
 })
+
 /* REGISTRATION */
 app.post('/register', (request, response) => {
 	// let login_info = request.body.login_info;

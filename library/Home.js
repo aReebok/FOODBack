@@ -14,7 +14,7 @@ function Home (props) {
 
     let app_logo = 'https://i.imgur.com/dt5dJEI.png';
     let app_icon = 'https://i.imgur.com/qlrJbhC.png';
-    let url =  'http://10.42.231.225:3001';
+    let url =  'http://192.168.1.212:3001';
     let loaded_comments = ['HELLO'];
     let hot_at_cage_food = '**** here is hot cage foods'; // MAKE THIS STATE VAR
     // let uid = 0;

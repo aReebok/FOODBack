@@ -18,7 +18,7 @@ export default class MyApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://10.42.231.225:3001',
+      url: 'http://192.168.1.212:3001',
     };
   }
 

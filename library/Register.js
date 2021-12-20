@@ -6,7 +6,7 @@ export default class Login extends Component {
         super(props);
         this.state = {
             app_icon: 'https://i.imgur.com/qlrJbhC.png',
-            url: 'http://10.42.231.225:3001',
+            url: 'http://192.168.1.212:3001',
             formContentType: "application/x-www-form-urlencoded;charset=UTF-8", 
             username: 'username',
             pin: '0000',

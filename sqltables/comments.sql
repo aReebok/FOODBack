@@ -5,9 +5,10 @@ CREATE TABLE comments(
     uid             int references users(uid),
     date            DATE DEFAULT CURRENT_DATE,
 
-    neg_feedback        VARCHAR NOT NULL,
+    neg_feedback    VARCHAR NOT NULL,
     comment         VARCHAR NOT NULL,
     votes           int NOT NULL DEFAULT 0,
+    -- votes           VARCHAR NOT NULL DEFAULT "0",    
 
     unique(comment)
 );

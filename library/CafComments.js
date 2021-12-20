@@ -19,9 +19,10 @@ function CafComments(props) {
     
     // var state_comments = 0;
     const [stateComments, setStateComments] = useState(0);
+    const [commentVote, setCommentVote] = useState('null'); // 
     
     // setStateComments(0);
-    let url = 'http://10.42.231.225:3001';
+    let url = 'http://192.168.1.212:3001';
     let formContentType="application/x-www-form-urlencoded;charset=UTF-8";
 
     const [comment, setComment] = useState(); // setComment("com");
@@ -65,6 +66,23 @@ function CafComments(props) {
                 console.error(error);
             });
       }
+
+    const handleFindVoteStatus = (op, method = '', params = {}) => {
+        if (method != '')
+            params.method = method;
+        fetch(url + '/'+op, params)
+            .then((response) => response.json()) // response.json()
+            .then((responseText) => {
+              console.log(responseText);
+
+              // DO STUFF HERE --> for every comment look for if user with uid responded. 
+
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     
     const handlePressComments = (op, method = '', params = {}) => {
         if (method != '')
@@ -91,7 +109,8 @@ function CafComments(props) {
                 arr.push(`${responseText[i].uid}`)
                 arr.push(`${responseText[i].cid}`)
                 twod_arr.push(arr);
-                }
+                arr.push('null');
+            }   
 
                 setCommentItems([]); // empties comments so far to refresh 
                 setCommentItems(twod_arr);
@@ -144,7 +163,11 @@ function CafComments(props) {
                             {
                                 // console.log(commentItems);
                                 commentItems.map((item, index) => {    
-                                     return <Comment key={index} text={`${item[0]}`} color={`${item[1]}`} votes={`${item[2]}`} date={`${item[3]}`} post_uid={`${item[4]}`} cid={`${item[5]}`} />
+                                     return <Comment key={index} 
+                                            text={`${item[0]}`} color={`${item[1]}`} 
+                                            votes={`${item[2]}`} date={`${item[3]}`} 
+                                            post_uid={`${item[4]}`} cid={`${item[5]}`} 
+                                            comment_vote={commentVote} />
                                      })
                             }
 

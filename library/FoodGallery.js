@@ -15,7 +15,7 @@ function FoodGallery(props) {
 
     const app_logo = 'https://i.imgur.com/dt5dJEI.png';
     
-    const url = 'http://10.42.231.225:3001';
+    const url = 'http://192.168.1.212:3001';
     const formContentType = "application/x-www-form-urlencoded;charset=UTF-8";
     
 
