@@ -6,7 +6,7 @@
 Final project presentation can be found here:
 - https://docs.google.com/presentation/d/1JjxOXfBY5wo2_2gzDUrPgQe12v1FRNPJR9jXR2Aee1U/edit#slide=id.g10963e407b9_0_10
 
-Created in Expo, using NodeJS, PostgreSQL, RESTful API, and 
+Created in Expo, using NodeJS, PostgreSQL, RESTful API, and React Native.
 
 ## Features 
 
